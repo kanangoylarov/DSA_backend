@@ -63,6 +63,10 @@ class Scripts(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+<<<<<<< HEAD
+    
+=======
+>>>>>>> main
 
     def __str__(self):
         return self.title
@@ -94,7 +98,11 @@ class Broadcasts(models.Model):
     
 
 class Syllabus(models.Model):
+<<<<<<< HEAD
+    script = models.ForeignKey(Scripts, on_delete=models.CASCADE, related_name='syllabus', default=1)
+=======
     script = models.ForeignKey(Scripts, on_delete=models.CASCADE, related_name='syllabi', default=1)
+>>>>>>> main
     title = models.CharField(max_length=100)
     description = models.TextField()
     label = models.CharField(max_length=100,null=True)
