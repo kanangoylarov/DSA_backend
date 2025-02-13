@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+<<<<<<< HEAD
     'corsheaders',
     'rest_framework',
+=======
+>>>>>>> main
 ]
 
 MIDDLEWARE = [
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
     'corsheaders.middleware.CorsMiddleware',
 ]
 
@@ -57,6 +61,10 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+=======
+]
+
+>>>>>>> main
 ROOT_URLCONF = 'dsa.urls'
 
 TEMPLATES = [
@@ -86,7 +94,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dsa',  # Veritabanı adı
         'USER': 'postgres',  # Kullanıcı adı
+<<<<<<< HEAD
         'PASSWORD': 'umud9999',  # Parola
+=======
+        'PASSWORD': 'scarpion.6159',  # Parola
+>>>>>>> main
         'HOST': 'localhost',  # Yerel veritabanı için 'localhost' kullanabilirsiniz
         'PORT': '5432',  # PostgreSQL portu
     }
@@ -133,9 +145,12 @@ STATIC_URL = 'static/'  # Statik dosyaların yolu
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
 
 
 import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+=======
+>>>>>>> main
