@@ -1,43 +1,37 @@
-from django.shortcuts import render, redirect
-from .forms import ApplyForm, ContactForm, SubscribeForm
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .models import Apply, Contact, Subscribe
+from .serializers import ApplySerializer, ContactSerializer, SubscribeSerializer
+from django.http import JsonResponse
 
+# Apply ViewSet
+class ApplyViewSet(viewsets.ModelViewSet):
+    queryset = Apply.objects.all()
+    serializer_class = ApplySerializer
 
-def apply_view(request):
-    if request.method == 'POST':
-        form = ApplyForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = ApplyForm()
-    
-    return render(request, 'apply_form.html', {'form': form})
+# Contact ViewSet
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
 
-def contact_view(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = ContactForm()
+# Subscribe ViewSet
+class SubscribeViewSet(viewsets.ModelViewSet):
+    queryset = Subscribe.objects.all()
+    serializer_class = SubscribeSerializer
 
-    return render(request, 'contact_form.html', {'form': form})
-
-
-def subscribe_view(request):
-    if request.method == 'POST':
-        form = SubscribeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = SubscribeForm()
-
-    return render(request, 'subscribe_form.html', {'form': form})
-
-
+# Success Mesajı İçin API Endpoint
+@api_view(['GET'])
 def success_view(request):
-    return render(request, 'success.html')
+    return Response({'message': 'Form başarıyla gönderildi!'})
+
+@api_view(['GET'])
+def apply_view(request):
+    return Response({"message": "Apply API çalışıyor!"})
 
 
+@api_view(['GET'])
+def contacts_view(request):
+    contacts = Contact.objects.all()
+    serializer = ContactSerializer(contacts, many=True)
+    return Response(serializer.data)
