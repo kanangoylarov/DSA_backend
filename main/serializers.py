@@ -25,7 +25,7 @@ class ScriptsSerializer(serializers.ModelSerializer):
     sessions = SessionsSerializer(many=True, read_only=True)
     broadcast = BroadcastsSerializer(read_only=True)
     syllabus = SyllabusSerializer(many=True, read_only=True)
-    Trainer = TrainerSerializer(many=True, read_only=True)
+    trainers = TrainerSerializer(many=True, read_only=True)
 
     class Meta:
         model = Scripts

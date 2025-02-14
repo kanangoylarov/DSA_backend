@@ -56,7 +56,7 @@ class Scripts(models.Model):
     title = models.TextField(max_length=100)
     description = models.TextField()
     information = models.TextField()
-    money = models.IntegerField()
+    money = models.IntegerField(default=0)
     image = models.ImageField(upload_to='scripts/')
     for_who = models.TextField()
     certificates = models.TextField()
