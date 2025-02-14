@@ -63,10 +63,7 @@ class Scripts(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-<<<<<<< HEAD
     
-=======
->>>>>>> main
 
     def __str__(self):
         return self.title
@@ -85,10 +82,10 @@ class Sessions(models.Model):
     
 
 class Broadcasts(models.Model):
-    script = models.ForeignKey(Scripts, on_delete=models.CASCADE, related_name='broadcasts',default=1)
+    script = models.OneToOneField(Scripts, on_delete=models.CASCADE, related_name='broadcast')
     title = models.CharField(max_length=100)
     info = models.TextField()
-    link = models.URLField()
+    link = models.TextField()
     trainer = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -98,17 +95,14 @@ class Broadcasts(models.Model):
     
 
 class Syllabus(models.Model):
-<<<<<<< HEAD
     script = models.ForeignKey(Scripts, on_delete=models.CASCADE, related_name='syllabus', default=1)
-=======
-    script = models.ForeignKey(Scripts, on_delete=models.CASCADE, related_name='syllabi', default=1)
->>>>>>> main
     title = models.CharField(max_length=100)
     description = models.TextField()
     label = models.CharField(max_length=100,null=True)
-    information = models.TextField(max_length=100)
+    information = models.TextField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+    
