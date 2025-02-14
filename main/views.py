@@ -1,6 +1,24 @@
 from rest_framework import viewsets
-from .models import Scripts, Sessions, Broadcasts, Syllabus, Trainer
-from .serializers import ScriptsSerializer, SessionsSerializer, BroadcastsSerializer, SyllabusSerializer, TrainerSerializer
+from .models import Scripts, Sessions, Broadcasts, Syllabus, Trainer, Apply, Contact, Subscribe
+from .serializers import ScriptsSerializer, SessionsSerializer, BroadcastsSerializer, SyllabusSerializer, TrainerSerializer, ApplySerializer, ContactSerializer, SubscribeSerializer
+
+
+
+
+
+class ApplyViewSet(viewsets.ModelViewSet):
+    queryset = Apply.objects.all()
+    serializer_class = ApplySerializer
+    
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+    
+    
+
+class SubscribeViewSet(viewsets.ModelViewSet):
+    queryset = Subscribe.objects.all()
+    serializer_class = SubscribeSerializer
 
 # SESSIONS API
 class SessionsViewSet(viewsets.ModelViewSet):
