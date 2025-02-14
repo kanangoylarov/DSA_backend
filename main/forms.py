@@ -32,7 +32,7 @@ class SubscribeForm(forms.ModelForm):
 class ScriptsForm(forms.ModelForm):
     class Meta:
         model = Scripts
-        fields = ['title', 'description', 'information', 'image', 'for_who', 'certificates', 'certificate_image']
+        fields = ['title', 'description', 'information', 'image','money' 'for_who', 'certificates', 'certificate_image']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),

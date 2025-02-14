@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Scripts, Sessions, Broadcasts, Syllabus
-from .serializers import ScriptsSerializer, SessionsSerializer, BroadcastsSerializer, SyllabusSerializer
+from .models import Scripts, Sessions, Broadcasts, Syllabus, Trainer
+from .serializers import ScriptsSerializer, SessionsSerializer, BroadcastsSerializer, SyllabusSerializer, TrainerSerializer
 
 # SESSIONS API
 class SessionsViewSet(viewsets.ModelViewSet):
@@ -16,10 +16,14 @@ class BroadcastsViewSet(viewsets.ModelViewSet):
 class SyllabusViewSet(viewsets.ModelViewSet):
     queryset = Syllabus.objects.all()
     serializer_class = SyllabusSerializer
+# TRAINERS API  
+class TrainerViewSet(viewsets.ModelViewSet):
+    queryset = Trainer.objects.all()
+    serializer_class = TrainerSerializer
 
 
 class ScriptsViewSet(viewsets.ModelViewSet):
-    queryset = Scripts.objects.prefetch_related('sessions', 'syllabus').select_related('broadcast')
+    queryset = Scripts.objects.prefetch_related('sessions', 'syllabus','trainers').select_related('broadcast')
     serializer_class = ScriptsSerializer
 
     def get_serializer_context(self):
