@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Müraciət, Əlaqə, Qeydiyyat, Bootcamps, BootcampTipi, Təlimlər, Mətinlər, Sessiyalar, Nümayişlər, Sillabuslar, Təlimçilər, Müəllimlər, Məzunlar
+from .models import Müraciət, Əlaqə, Qeydiyyat, Bootcamps, BootcampTipi, Təlimlər, Mətinlər, Sessiyalar, Nümayişlər, Sillabuslar, Təlimçilər, Müəllimlər, Məzunlar,FAQ
 admin.site.register(Müraciət)
 admin.site.register(Əlaqə)
 admin.site.register(Qeydiyyat)
@@ -13,3 +13,4 @@ admin.site.register(Sillabuslar)
 admin.site.register(Təlimçilər)
 admin.site.register(Müəllimlər)
 admin.site.register(Məzunlar)
+admin.site.register(FAQ)

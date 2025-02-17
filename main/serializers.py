@@ -93,7 +93,8 @@ from .models import (
     Sillabuslar,
     Təlimçilər,
     Müəllimlər,
-    Məzunlar
+    Məzunlar,
+    FAQ
 )
 
 
@@ -172,4 +173,10 @@ class MüəllimlərSerializer(serializers.ModelSerializer):
 class MəzunlarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Məzunlar
+        fields = '__all__'
+
+
+class FAQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQ
         fields = '__all__'

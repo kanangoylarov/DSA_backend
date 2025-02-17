@@ -57,19 +57,22 @@ class Qeydiyyat(models.Model):
  
  
 class Bootcamps(models.Model):
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     order = models.IntegerField(unique=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        db_table = 'main_bootcamps'
+
     def __str__(self):
         return self.name
 
 
+
 class BootcampTipi(models.Model):
-    bootcamp = models.ForeignKey(Bootcamps, on_delete=models.CASCADE, related_name='bootcamps')
+    bootcamp = models.ForeignKey(Bootcamps, on_delete=models.CASCADE, related_name='bootcamp_tipi', default=2)
     name = models.CharField(max_length=100)
     order = models.IntegerField(unique=True)
     is_active = models.BooleanField(default=True)
@@ -84,7 +87,7 @@ class BootcampTipi(models.Model):
     
 class Təlimlər(models.Model):
     id = models.AutoField(primary_key=True)
-    bootcamp_type = models.ForeignKey(BootcampTipi, on_delete=models.CASCADE, related_name='təlimlər')
+    bootcamp_type = models.ForeignKey(BootcampTipi, on_delete=models.CASCADE, related_name='telimler')
     is_active = models.BooleanField(default=True)
     order = models.IntegerField(unique=True)
     title = models.TextField(max_length=100)
@@ -104,7 +107,7 @@ class Təlimlər(models.Model):
     
 class Mətinlər(models.Model):
     id = models.AutoField(primary_key=True)
-    trainings = models.ForeignKey(Təlimlər, on_delete=models.CASCADE, related_name='təlimlər')
+    trainings = models.ForeignKey(Təlimlər, on_delete=models.CASCADE, related_name='metinler')
     title = models.TextField(max_length=100)
     description = models.TextField()
     information = models.TextField()
@@ -135,7 +138,7 @@ class Sessiyalar(models.Model):
     
 
 class Nümayişlər(models.Model):
-    metinler = models.OneToOneField(Mətinlər, on_delete=models.CASCADE, related_name='nümayişlər')
+    metinler = models.OneToOneField(Mətinlər, on_delete=models.CASCADE, related_name='nümayislər')
     title = models.CharField(max_length=100)
     info = models.TextField()
     link = models.TextField()
@@ -197,3 +200,16 @@ class Məzunlar(models.Model):
 
     def __str__(self):
         return f'{self.name} {self.surname}'
+    
+    
+    
+class FAQ(models.Model):
+    question = models.TextField()
+    answer = models.TextField()
+    question_en = models.TextField()
+    answer_en = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.question
