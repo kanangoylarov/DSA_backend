@@ -1,6 +1,9 @@
 from django.db import models
 
-class Apply(models.Model):
+
+
+
+class Müraciət(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     email = models.EmailField()
@@ -12,7 +15,7 @@ class Apply(models.Model):
         return f'{self.name} {self.surname}'
 
 
-class Contact(models.Model):
+class Əlaqə(models.Model):
     CATEGORY_CHOICES = [
         ('Data Science Bootcamp', 'Data Science Bootcamp'),
         ('SPSS Modeler Bootcamp', 'SPSS Modeler Bootcamp'),
@@ -37,7 +40,7 @@ class Contact(models.Model):
 
     
     
-class Subscribe(models.Model):
+class Qeydiyyat(models.Model):
     full_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
@@ -49,15 +52,64 @@ class Subscribe(models.Model):
         return self.email
 
 ## Models for Data Science Bootcamp--------------------------------------------------------------------------------------------------
-    
-    
-class Scripts(models.Model):
+ 
+ 
+ 
+ 
+class Bootcamps(models.Model):
     id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    order = models.IntegerField(unique=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
+class BootcampTipi(models.Model):
+    bootcamp = models.ForeignKey(Bootcamps, on_delete=models.CASCADE, related_name='bootcamps')
+    name = models.CharField(max_length=100)
+    order = models.IntegerField(unique=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+    
+    
+    
+class Təlimlər(models.Model):
+    id = models.AutoField(primary_key=True)
+    bootcamp_type = models.ForeignKey(BootcampTipi, on_delete=models.CASCADE, related_name='təlimlər')
+    is_active = models.BooleanField(default=True)
+    order = models.IntegerField(unique=True)
+    title = models.TextField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+
+    def __str__(self):
+        return self.title
+    
+    
+    
+    
+    
+    
+   
+    
+class Mətinlər(models.Model):
+    id = models.AutoField(primary_key=True)
+    trainings = models.ForeignKey(Təlimlər, on_delete=models.CASCADE, related_name='təlimlər')
     title = models.TextField(max_length=100)
     description = models.TextField()
     information = models.TextField()
     money = models.IntegerField()
-    image = models.ImageField(upload_to='scripts/')
+    image = models.ImageField(upload_to='mətinlər/')
     for_who = models.TextField()
     certificates = models.TextField()
     certificate_image = models.ImageField(upload_to='certificates/')
@@ -70,8 +122,8 @@ class Scripts(models.Model):
         return self.title
     
 
-class Sessions(models.Model):
-    script = models.ForeignKey(Scripts, on_delete=models.CASCADE, related_name='sessions',default=1)
+class Sessiyalar(models.Model):
+    metinler = models.ForeignKey(Mətinlər, on_delete=models.CASCADE, related_name='sessiyalar',default=1)
     session_number = models.IntegerField()
     date = models.DateField()
     hour = models.TimeField()
@@ -82,8 +134,8 @@ class Sessions(models.Model):
         return f'{self.session_number} - {self.date} - {self.hour}'
     
 
-class Broadcasts(models.Model):
-    script = models.OneToOneField(Scripts, on_delete=models.CASCADE, related_name='broadcast')
+class Nümayişlər(models.Model):
+    metinler = models.OneToOneField(Mətinlər, on_delete=models.CASCADE, related_name='nümayişlər')
     title = models.CharField(max_length=100)
     info = models.TextField()
     link = models.TextField()
@@ -95,8 +147,8 @@ class Broadcasts(models.Model):
         return self.title
     
 
-class Syllabus(models.Model):
-    script = models.ForeignKey(Scripts, on_delete=models.CASCADE, related_name='syllabus', default=1)
+class Sillabuslar(models.Model):
+    metinler = models.ForeignKey(Mətinlər, on_delete=models.CASCADE, related_name='syllabus', default=1)
     title = models.CharField(max_length=100)
     description = models.TextField()
     label = models.CharField(max_length=100,null=True)
@@ -108,10 +160,36 @@ class Syllabus(models.Model):
         return self.title
     
     
-class Trainer(models.Model):
-    script = models.ForeignKey(Scripts, on_delete=models.CASCADE, related_name='trainers', default=1)
+class Təlimçilər(models.Model):
+    metinler = models.ForeignKey(Mətinlər, on_delete=models.CASCADE, related_name='trainers', default=1)
     info = models.TextField()
     name = models.CharField(max_length=100)
+    work_location = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='trainers/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.name} {self.surname}'
+
+
+    
+class Müəllimlər(models.Model):
+    info = models.TextField()
+    name = models.CharField(max_length=100)
+    work_position = models.CharField(max_length=100)
+    work_location = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='trainers/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.name} {self.surname}'
+    
+    
+class Məzunlar(models.Model):
+    name = models.CharField(max_length=100)
+    work_position = models.CharField(max_length=100)
     work_location = models.CharField(max_length=100)
     image = models.ImageField(upload_to='trainers/')
     created_at = models.DateTimeField(auto_now_add=True)

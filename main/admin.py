@@ -1,12 +1,15 @@
 from django.contrib import admin
-from .models import Apply, Contact, Subscribe, Scripts, Sessions, Broadcasts, Syllabus, Trainer
-
-
-admin.site.register(Apply)
-admin.site.register(Contact)
-admin.site.register(Subscribe)
-admin.site.register(Scripts)
-admin.site.register(Sessions)
-admin.site.register(Broadcasts)
-admin.site.register(Syllabus)
-admin.site.register(Trainer)
+from .models import Müraciət, Əlaqə, Qeydiyyat, Bootcamps, BootcampTipi, Təlimlər, Mətinlər, Sessiyalar, Nümayişlər, Sillabuslar, Təlimçilər, Müəllimlər, Məzunlar
+admin.site.register(Müraciət)
+admin.site.register(Əlaqə)
+admin.site.register(Qeydiyyat)
+admin.site.register(Bootcamps)
+admin.site.register(BootcampTipi)
+admin.site.register(Təlimlər)
+admin.site.register(Mətinlər)
+admin.site.register(Sessiyalar)
+admin.site.register(Nümayişlər)
+admin.site.register(Sillabuslar)
+admin.site.register(Təlimçilər)
+admin.site.register(Müəllimlər)
+admin.site.register(Məzunlar)

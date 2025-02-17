@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'dsa.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dsa',  # Veritabanı adı
+        'NAME': 'dsa_pt',  # Veritabanı adı
         'USER': 'postgres',  # Kullanıcı adı
-        'PASSWORD': 'umud9999',  # Parola
+        'PASSWORD': 'scarpion.6159',  # Parola
         'HOST': 'localhost',  # Yerel veritabanı için 'localhost' kullanabilirsiniz
         'PORT': '5432',  # PostgreSQL portu
     }
